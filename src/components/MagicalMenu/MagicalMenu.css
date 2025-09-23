@@ -1,0 +1,151 @@
+.magical-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%);
+}
+
+.magical-menu {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 4rem;
+  position: relative;
+}
+
+.magical-menu-header {
+  position: absolute;
+  top: 4rem;
+  right: 4rem;
+  z-index: 10;
+}
+
+.magical-menu-close {
+  width: 60px;
+  height: 60px;
+  border: 2px solid var(--foreground);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: transparent;
+}
+
+.magical-menu-close:hover {
+  background: var(--foreground);
+  color: var(--background);
+  transform: rotate(90deg);
+}
+
+.magical-menu-close span {
+  font-family: "PP Neue Montreal", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--foreground);
+  transition: color 0.3s ease;
+}
+
+.magical-menu-close:hover span {
+  color: var(--background);
+}
+
+.magical-menu-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.magical-menu-items {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+}
+
+.magical-menu-item {
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+}
+
+.magical-menu-item a {
+  font-family: "PP Neue Montreal", sans-serif;
+  font-size: clamp(3rem, 8vw, 8rem);
+  font-weight: 700;
+  color: var(--foreground);
+  text-decoration: none;
+  line-height: 0.9;
+  display: block;
+  transition: color 0.3s ease;
+  text-transform: none;
+}
+
+.magical-menu-item:hover a {
+  color: #ff6b6b;
+}
+
+.magical-menu-contact {
+  margin-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding-top: 2rem;
+}
+
+.magical-menu-contact .magical-menu-item a {
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  font-weight: 400;
+  opacity: 0.8;
+}
+
+.magical-menu-contact .magical-menu-item:hover a {
+  opacity: 1;
+  color: #4ecdc4;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .magical-menu {
+    padding: 2rem;
+  }
+
+  .magical-menu-header {
+    top: 2rem;
+    right: 2rem;
+  }
+
+  .magical-menu-close {
+    width: 50px;
+    height: 50px;
+  }
+
+  .magical-menu-close span {
+    font-size: 1.2rem;
+  }
+
+  .magical-menu-content {
+    gap: 2rem;
+  }
+
+  .magical-menu-items {
+    gap: 1rem;
+  }
+
+  .magical-menu-item a {
+    font-size: clamp(2rem, 12vw, 4rem);
+  }
+}

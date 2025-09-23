@@ -1,0 +1,64 @@
+.marquee {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 60px 0;
+  background: transparent;
+}
+
+.marquee-wrapper {
+  display: flex;
+  position: relative;
+  width: fit-content;
+  will-change: transform;
+}
+
+.marquee-content {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  gap: 80px;
+  padding-right: 80px;
+}
+
+.logo-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  height: 120px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.logo-item:hover {
+  transform: scale(1.1);
+}
+
+.logo-item img {
+  max-height: 100%;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+.logo-item:hover img {
+  filter: none;
+  opacity: 1;
+}
+
+/* Keep problematic logos white on hover to prevent disappearing */
+.logo-item:hover img[alt="Sony"],
+.logo-item:hover img[alt="L'Oréal"] {
+  filter: brightness(0) invert(1);
+  opacity: 0.9;
+}
+
+.marquee,
+.marquee-wrapper {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+}

@@ -1,0 +1,207 @@
+:root {
+  --background: #000000;
+  --foreground: #ffffff;
+  --foreground-secondary: #666666;
+  --foreground-tertiary: #999999;
+  --background-light: #f0f0f0;
+  --foreground-light: #333333;
+}
+
+@font-face {
+  font-family: "Nippo";
+  src: url("/fonts/nippo/Nippo-Extralight.otf");
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: "Nippo";
+  src: url("/fonts/nippo/Nippo-Light.otf");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Nippo";
+  src: url("/fonts/nippo/Nippo-Regular.otf");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Nippo";
+  src: url("/fonts/nippo/Nippo-Medium.otf");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Nippo";
+  src: url("/fonts/nippo/Nippo-Bold.otf");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "PP Neue Montreal";
+  src: url("/fonts/pp-neue-montreal/PPNeueMontreal-Thin.otf");
+  font-weight: 100;
+}
+
+@font-face {
+  font-family: "PP Neue Montreal";
+  src: url("/fonts/pp-neue-montreal/PPNeueMontreal-Book.otf");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "PP Neue Montreal";
+  src: url("/fonts/pp-neue-montreal/PPNeueMontreal-Medium.otf");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "PP Neue Montreal";
+  src: url("/fonts/pp-neue-montreal/PPNeueMontreal-Bold.otf");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "PP Neue Montreal";
+  src: url("/fonts/pp-neue-montreal/PPNeueMontreal-Italic.otf");
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "PP Neue Montreal";
+  src: url("/fonts/pp-neue-montreal/PPNeueMontreal-SemiBolditalic.otf");
+  font-weight: 600;
+  font-style: italic;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  color: var(--foreground);
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+h1 {
+  text-transform: uppercase;
+  font-family: "PP Neue Montreal";
+  font-weight: 700;
+  font-size: 7rem;
+  line-height: 90%;
+  letter-spacing: -0.35rem;
+}
+
+h2 {
+  text-transform: uppercase;
+  font-family: "PP Neue Montreal";
+  font-weight: 700;
+  font-size: 7rem;
+  line-height: 100%;
+}
+
+h3 {
+  text-transform: uppercase;
+  font-family: "PP Neue Montreal";
+  font-weight: 600;
+  font-size: 3rem;
+  line-height: 100%;
+}
+
+h4 {
+  text-transform: uppercase;
+  font-family: "PP Neue Montreal";
+  font-weight: 600;
+  font-size: 2rem;
+  line-height: 100%;
+}
+
+p {
+  font-family: "PP Neue Montreal";
+  font-weight: 400;
+  font-size: 1.2rem;
+  line-height: 135%;
+  color: var(--foreground-tertiary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+p.primary {
+  text-transform: uppercase;
+  font-family: "PP Neue Montreal";
+  font-weight: 600;
+  font-size: 1.75rem;
+  line-height: 100%;
+  color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  text-decoration: none;
+  text-transform: uppercase;
+  color: var(--foreground);
+  font-family: "PP Neue Montreal";
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.container {
+  position: relative;
+  width: 100%;
+  padding: 4em;
+}
+
+section {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 900px) {
+  h1 {
+    font-size: 4rem;
+    letter-spacing: -0.25rem;
+  }
+
+  h2 {
+    font-size: 2.75rem;
+  }
+
+  h3 {
+    font-size: 2rem;
+  }
+
+  .container {
+    padding: 2em;
+  }
+}
+
+
+/* Hide all Next.js error overlays and dev indicators */
+iframe[src*="webpack"],
+div[data-nextjs-toast],
+div[data-nextjs-errors-toast],
+div[data-nextjs-dialog-overlay],
+div[data-nextjs-build-error-overlay],
+div[data-nextjs-container],
+div[data-nextjs-errors-dialog],
+#__next-build-watcher,
+.nexjs__container__errors,
+nextjs-portal {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}

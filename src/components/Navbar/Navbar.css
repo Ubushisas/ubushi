@@ -1,0 +1,220 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  padding: 2em 4em;
+  z-index: 100000000;
+  mix-blend-mode: difference;
+  display: flex;
+  gap: 2em;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-col {
+  flex: 1;
+  display: flex;
+  gap: 2em;
+}
+
+.navbar-left {
+  justify-content: flex-start;
+}
+
+.navbar-center {
+  justify-content: center;
+}
+
+.navbar-right {
+  justify-content: flex-end;
+}
+
+.navbar-sub-col {
+  flex: none;
+}
+
+.discovery-call-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 2em;
+}
+
+.discovery-call-btn {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--foreground);
+  border-radius: 2rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.discovery-call-btn:hover {
+  background-color: var(--foreground);
+  color: var(--background);
+}
+
+.discovery-call-btn p {
+  margin: 0;
+  font-family: "Nippo";
+  font-weight: 400;
+  font-size: 1rem;
+  color: var(--foreground);
+  text-transform: none;
+}
+
+.discovery-call-btn:hover p {
+  color: var(--background);
+}
+
+.logo h3 {
+  font-family: "PP Neue Montreal";
+  font-weight: 700;
+  font-size: 2.5rem;
+  color: var(--foreground);
+  text-transform: none !important;
+}
+
+.time p,
+.nav-items p {
+  position: relative;
+  top: 0.075rem;
+  font-family: "Nippo";
+  font-weight: 400;
+  font-size: 1.125rem;
+  color: var(--foreground);
+  -webkit-text-stroke: 0.25px var(--foreground);
+}
+
+.nav-items p {
+  text-transform: none;
+  margin-bottom: 0.5rem;
+}
+
+.music-toggle-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.music-toggle-btn {
+  width: 100px;
+  height: 40px;
+  background-color: var(--foreground-secondary);
+  border-radius: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.sound-bars {
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.music-toggle-btn {
+  display: flex;
+  align-items: center;
+}
+
+.music-toggle-btn p {
+  font-family: "Nippo";
+  font-weight: 400;
+  font-size: 1rem;
+  color: var(--foreground);
+  -webkit-text-stroke: 0.25px var(--foreground);
+}
+
+.sound-bars svg path {
+  stroke: var(--foreground);
+}
+
+/* Dropdown Styles */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.dropdown-toggle p {
+  position: relative;
+  top: 0.075rem;
+  font-family: "Nippo";
+  font-weight: 400;
+  font-size: 1.125rem;
+  color: var(--foreground);
+  -webkit-text-stroke: 0.25px var(--foreground);
+  text-transform: none;
+  margin-bottom: 0.5rem;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  padding: 1rem 0;
+  min-width: 150px;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+}
+
+.dropdown-menu-open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-menu a {
+  display: block;
+  margin-bottom: 0.5rem;
+  text-decoration: none;
+}
+
+.dropdown-menu a:last-child {
+  margin-bottom: 0;
+}
+
+.dropdown-menu p {
+  position: relative;
+  top: 0.075rem;
+  font-family: "Nippo";
+  font-weight: 400;
+  font-size: 1.125rem;
+  color: var(--foreground);
+  -webkit-text-stroke: 0.25px var(--foreground);
+  text-transform: none;
+  margin-bottom: 0;
+}
+
+@media (max-width: 900px) {
+  .navbar {
+    padding: 2em;
+  }
+
+  .time,
+  .music-toggle-wrapper {
+    display: none;
+  }
+
+  .nav-items {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .dropdown-menu {
+    left: 0;
+    right: auto;
+    min-width: 200px;
+    width: calc(100vw - 4em);
+    max-width: 300px;
+  }
+}
