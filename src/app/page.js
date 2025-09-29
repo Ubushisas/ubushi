@@ -47,57 +47,73 @@ export default function Home() {
   }, []);
 
   // Scroll-controlled hero video
-  useEffect(() => {
-    const video = heroVideoRef.current;
-    const heroSection = heroSectionRef.current;
+  useGSAP(
+    () => {
+      const video = heroVideoRef.current;
+      const heroSection = heroSectionRef.current;
 
-    if (!video || !heroSection) return;
+      if (!video || !heroSection) return;
 
-    let scrollTriggerInstance;
+      let scrollTriggerInstance;
 
-    const initVideoScroll = () => {
-      const videoDuration = video.duration;
+      const initVideoScroll = () => {
+        const videoDuration = video.duration;
 
-      // Calculate scroll distance - about 300px per second of video
-      const scrollDistance = videoDuration * 300;
+        // Calculate scroll distance - about 300px per second of video
+        const scrollDistance = videoDuration * 300;
 
-      scrollTriggerInstance = ScrollTrigger.create({
-        trigger: heroSection,
-        start: "top top",
-        end: `+=${scrollDistance}`,
-        pin: true,
-        pinSpacing: true,
-        scrub: 0.5,
-        onUpdate: (self) => {
-          const progress = self.progress;
+        scrollTriggerInstance = ScrollTrigger.create({
+          trigger: heroSection,
+          start: "top top",
+          end: `+=${scrollDistance}`,
+          pin: true,
+          pinSpacing: true,
+          scrub: 0.5,
+          invalidateOnRefresh: true,
+          onUpdate: (self) => {
+            const progress = self.progress;
 
-          if (video.duration && !isNaN(video.duration)) {
-            const newTime = progress * videoDuration;
-            if (Math.abs(video.currentTime - newTime) > 0.01) {
-              video.currentTime = newTime;
+            if (video.duration && !isNaN(video.duration)) {
+              const newTime = progress * videoDuration;
+              if (Math.abs(video.currentTime - newTime) > 0.01) {
+                video.currentTime = newTime;
+              }
+            }
+          },
+          onComplete: () => {
+            // Video finished, continue scrolling normally
+            if (video.duration && !isNaN(video.duration)) {
+              video.currentTime = video.duration - 0.01;
             }
           }
-        },
-        onComplete: () => {
-          // Video finished, continue scrolling normally
-          video.currentTime = video.duration - 0.01;
-        }
-      });
-    };
+        });
 
-    // Wait for video to load
-    if (video.readyState >= 1) {
-      initVideoScroll();
-    } else {
-      video.addEventListener('loadedmetadata', initVideoScroll);
-    }
+        // Refresh all ScrollTriggers after adding the video one
+        setTimeout(() => {
+          ScrollTrigger.refresh();
+          ScrollTrigger.sort();
+        }, 100);
+      };
 
-    return () => {
-      if (scrollTriggerInstance) {
-        scrollTriggerInstance.kill();
+      // Wait for video to load
+      if (video.readyState >= 1) {
+        initVideoScroll();
+      } else {
+        const handleLoadedMetadata = () => {
+          initVideoScroll();
+        };
+        video.addEventListener('loadedmetadata', handleLoadedMetadata);
+
+        return () => {
+          video.removeEventListener('loadedmetadata', handleLoadedMetadata);
+          if (scrollTriggerInstance) {
+            scrollTriggerInstance.kill();
+          }
+        };
       }
-    };
-  }, []);
+    },
+    { dependencies: [] }
+  );
 
   // Image loop effect for menu with fade transition
   useEffect(() => {
@@ -165,7 +181,9 @@ export default function Home() {
       }
 
       // Refresh ScrollTrigger after DOM changes
-      ScrollTrigger.refresh();
+      setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 200);
 
       return () => {
         ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
