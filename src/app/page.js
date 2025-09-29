@@ -393,13 +393,20 @@ export default function Home() {
               src="/Sphere.mp4"
               muted
               playsInline
+              preload="auto"
               style={{
                 width: '100vw',
                 height: '100vh',
                 objectFit: 'cover',
+                objectPosition: 'center center',
                 position: 'absolute',
                 top: 0,
-                left: 0
+                left: 0,
+                backgroundColor: '#000',
+                filter: 'contrast(1.05) saturate(1.1)',
+                backfaceVisibility: 'hidden',
+                transform: 'translateZ(0) scale(1.01)',
+                willChange: 'transform'
               }}
             />
           </div>
