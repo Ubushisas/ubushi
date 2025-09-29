@@ -20,16 +20,6 @@ const Footer = () => {
             <div className="footer-col">
               <div className="footer-sub-col"></div>
               <div className="footer-sub-col footer-links">
-                <p className="footer-col-header">[ * Case Studies ]</p>
-                <Link href="/archive">
-                  <p>Deep Delay Management</p>
-                </Link>
-                <Link href="/archive">
-                  <p>SuperMartxé Global</p>
-                </Link>
-                <Link href="/archive">
-                  <p>Myosotis Spa</p>
-                </Link>
               </div>
             </div>
           </div>

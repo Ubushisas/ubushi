@@ -23,6 +23,8 @@ gsap.registerPlugin(ScrollTrigger);
 export default function Home() {
   const container = useRef();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [menuImage, setMenuImage] = useState("/images/home/Menu-picture.jpg");
+  const [imageOpacity, setImageOpacity] = useState(1);
 
   // initialize Lenis smooth scrolling instance on window
   const lenis = useLenis();
@@ -41,6 +43,33 @@ export default function Home() {
     const cleanup = initMenu(setMenuOpen);
     return cleanup;
   }, []);
+
+  // Image loop effect for menu with fade transition
+  useEffect(() => {
+    if (menuOpen) {
+      const interval = setInterval(() => {
+        // Fade out
+        setImageOpacity(0);
+
+        setTimeout(() => {
+          // Change image
+          setMenuImage(prev =>
+            prev === "/images/home/Menu-picture.jpg"
+              ? "/images/home/Menu-picture2.jpg"
+              : "/images/home/Menu-picture.jpg"
+          );
+          // Fade in
+          setImageOpacity(1);
+        }, 1200);
+      }, 7000);
+
+      return () => clearInterval(interval);
+    } else {
+      // Reset when menu closes
+      setImageOpacity(1);
+      setMenuImage("/images/home/Menu-picture.jpg");
+    }
+  }, [menuOpen]);
 
   // controls geometric background animation on scroll
   useGSAP(
@@ -219,7 +248,7 @@ export default function Home() {
           <div className="menu-center">
             <div className="menu-toggle-btn">
               <div className="menu-toggle-label">
-                <p>Menu</p>
+                <p>About us</p>
               </div>
               <div className="menu-hamburger-icon">
                 <span></span>
@@ -237,21 +266,36 @@ export default function Home() {
         <div className="menu-overlay">
           <div className="menu-overlay-content">
             <div className="menu-media-wrapper">
-              <img src="/images/home/case-study-2.jpeg" alt="" />
+              <img
+                src={menuImage}
+                alt=""
+                style={{
+                  opacity: imageOpacity,
+                  transition: 'opacity 1.2s ease-in-out, filter 0.3s ease-in-out',
+                  filter: 'grayscale(100%)',
+                  cursor: 'pointer'
+                }}
+                onMouseEnter={(e) => e.target.style.filter = 'grayscale(0%)'}
+                onMouseLeave={(e) => e.target.style.filter = 'grayscale(100%)'}
+              />
             </div>
             <div className="menu-content-wrapper">
               <div className="menu-content-main">
                 <div className="menu-col">
-                  <div className="menu-link"><a href="#intro">Our process</a></div>
-                  <div className="menu-link"><a href="#case-studies">Portfolio</a></div>
-                  <div className="menu-link"><a href="#works">Services</a></div>
-                  <div className="menu-link"><a href="/archive">Archive</a></div>
-                  <div className="menu-link"><a href="#case-studies">Connect</a></div>
-                </div>
-                <div className="menu-col">
-                  <div className="menu-tag"><a href="#intro">growth strategy</a></div>
-                  <div className="menu-tag"><a href="#case-studies">case studies</a></div>
-                  <div className="menu-tag"><a href="#works">complete solutions</a></div>
+                  <div className="menu-link">
+                    <p style={{fontSize: '1.1rem', lineHeight: '1.6', marginBottom: '1rem'}}>
+                      We are Pedro and Lis. We are the founders of <strong>Ubushi</strong>.
+                    </p>
+                    <p style={{fontSize: '1.1rem', lineHeight: '1.6', marginBottom: '1rem'}}>
+                      Our mission is to help companies around the world become the main hubs for their customers—and, of course, their partners—through our <strong>Ubushi network</strong>.
+                    </p>
+                    <p style={{fontSize: '1.1rem', lineHeight: '1.6', marginBottom: '1rem'}}>
+                      Our network was built from the ground up by us. The core of this system lies in our team's expertise in setting up outbound infrastructure, optimizing workflow and creating bespoke, goal-specific promotions.
+                    </p>
+                    <p style={{fontSize: '1.1rem', lineHeight: '1.6', fontStyle: 'italic', fontWeight: 'bold'}}>
+                      These strategies are entirely unique and tailored to your needs.
+                    </p>
+                  </div>
                 </div>
               </div>
               <div className="menu-footer">
@@ -259,8 +303,8 @@ export default function Home() {
                   <p>Global Network</p>
                 </div>
                 <div className="menu-col">
-                  <p>+1 (555) 123-4567</p>
                   <p>hello@Ubushi.com</p>
+                  <p>Schedule a Discovery Call</p>
                 </div>
               </div>
             </div>
@@ -363,12 +407,12 @@ export default function Home() {
                 <p className="primary">[ Entertainment Client — Global Market Access ]</p>
                 <div className="case-studies-item-inner-img">
                   <img
-                    src="/images/home/festival-crowd.jpg"
+                    src="/images/home/DeepDelay.jpg"
                     alt="Festival crowd enjoying live music and entertainment"
                   />
                 </div>
                 <p>
-                  Deep Delay Management needed access to investors and elite partnerships in tech and entertainment. Ubushi introduced them to KKR, Superstruct, and top investors while facilitating connections with Jim Beam, Google, Kia, Kawasaki, securing free hotel stays, 50% Lufthansa discounts, €100k additional revenue, and sponsorship deals starting from €10k. Your investor access awaits.
+                  Deep Delay Management needed access to investors and elite partnerships in tech and entertainment. Ubushi connected them with top entertainment investors such as KKR and Superstruct, while also facilitating partnerships with Jim Beam, Google, Kia, Kawasaki, and more. Your access to investors awaits.
                 </p>
                 <div className="case-studies-item-inner-link">
                   <Link href="/archive">Discover the Journey</Link>
@@ -385,7 +429,7 @@ export default function Home() {
                 <p className="primary">[ Forest Services — Digital Catalog & Authority Positioning ]</p>
                 <div className="case-studies-item-inner-img">
                   <img
-                    src="/images/home/case-study-2.jpeg"
+                    src="/images/home/Cenproforest.jpg"
                     alt="Cenproforest industry authority showcase"
                   />
                 </div>
@@ -408,7 +452,7 @@ export default function Home() {
                 </p>
                 <div className="case-studies-item-inner-img">
                   <img
-                    src="/images/home/case-study-3.jpeg"
+                    src="/images/home/Cultivart.jpg"
                     alt="Cultivart European cannabis distribution network"
                   />
                 </div>
@@ -426,40 +470,16 @@ export default function Home() {
           </div>
           <div className="case-studies-items-images col">
             <div className="case-studies-img case-studies-img-1">
-              <img src="/images/home/festival-crowd.jpg" alt="Festival crowd enjoying live music and entertainment" />
+              <img src="/images/home/DeepDelay.jpg" alt="Festival crowd enjoying live music and entertainment" />
               <div className="hero-img-overlay"></div>
-              <div className="case-studies-img-link">
-                <Link href="/archive">
-                  <span>
-                    (&nbsp; View Article <MdArrowOutward />
-                    &nbsp;)
-                  </span>
-                </Link>
-              </div>
             </div>
             <div className="case-studies-img case-studies-img-2">
-              <img src="/images/home/case-study-2.jpeg" alt="" />
+              <img src="/images/home/Cenproforest.jpg" alt="" />
               <div className="hero-img-overlay"></div>
-              <div className="case-studies-img-link">
-                <Link href="/archive">
-                  <span>
-                    (&nbsp; View Article <MdArrowOutward />
-                    &nbsp;)
-                  </span>
-                </Link>
-              </div>
             </div>
             <div className="case-studies-img case-studies-img-3">
-              <img src="/images/home/case-study-3.jpeg" alt="" />
+              <img src="/images/home/Cultivart.jpg" alt="" />
               <div className="hero-img-overlay"></div>
-              <div className="case-studies-img-link">
-                <Link href="/archive">
-                  <span>
-                    (&nbsp; View Article <MdArrowOutward />
-                    &nbsp;)
-                  </span>
-                </Link>
-              </div>
             </div>
           </div>
         </section>
@@ -536,7 +556,7 @@ export default function Home() {
               </div>
               <div className="project-info">
                 <div className="project-url">
-                  <Link href={item.url}>( The Journey )</Link>
+                  <Link href={item.url}></Link>
                 </div>
               </div>
               <Link
