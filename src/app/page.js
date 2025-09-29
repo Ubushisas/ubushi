@@ -13,6 +13,7 @@ import ShuffleText from "@/components/ShuffleText/ShuffleText";
 import GeometricBackground from "@/components/GeometricBackground/GeometricBackground";
 import { carouselItems } from "./carouselItems";
 import { initMenu } from "@/utils/menuScript";
+import ScrollVideo from "@/components/ScrollVideo/ScrollVideo";
 
 import "./home.css";
 import "../styles/original-menu.css";
@@ -311,6 +312,9 @@ export default function Home() {
           </div>
         </div>
       </nav>
+
+      {/* Scroll-controlled video section */}
+      <ScrollVideo />
 
       <div className="app" ref={container}>
         <section className="hero">
