@@ -49,21 +49,52 @@ export default function Home() {
 
   // Auto-scroll on page load to show sphere animation
   useEffect(() => {
-    // Start immediately
-    if (window.lenis) {
-      // Smooth scroll to 75% of the video (150/200 frames)
-      const scrollTarget = window.innerHeight * 2.25; // 75% of video duration
-      window.lenis.scrollTo(scrollTarget, {
-        duration: 3.5,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
-      });
-    } else {
-      // Fallback for regular scroll
-      window.scrollTo({
-        top: window.innerHeight * 2.25,
-        behavior: 'smooth'
-      });
-    }
+    // Wait for video to be ready and ScrollTrigger to be set up
+    const timer = setTimeout(() => {
+      const video = heroVideoRef.current;
+      if (video && video.duration) {
+        // Calculate exact scroll distance for 75% of video (150/200 frames)
+        // Video scroll distance = duration * 300 (from ScrollTrigger setup)
+        const totalScrollDistance = video.duration * 300;
+        const scrollTo75Percent = totalScrollDistance * 0.75;
+
+        console.log('Auto-scrolling to frame 150:', {
+          videoDuration: video.duration,
+          totalScrollDistance,
+          scrollTo75Percent,
+          targetFrame: '150 of 200'
+        });
+
+        if (window.lenis) {
+          window.lenis.scrollTo(scrollTo75Percent, {
+            duration: 3.5,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+          });
+        } else {
+          // Fallback for regular scroll
+          window.scrollTo({
+            top: scrollTo75Percent,
+            behavior: 'smooth'
+          });
+        }
+      } else {
+        // Fallback if video not ready
+        const scrollTarget = window.innerHeight * 2.25;
+        if (window.lenis) {
+          window.lenis.scrollTo(scrollTarget, {
+            duration: 3.5,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+          });
+        } else {
+          window.scrollTo({
+            top: scrollTarget,
+            behavior: 'smooth'
+          });
+        }
+      }
+    }, 1000); // Wait 1 second for video to load
+
+    return () => clearTimeout(timer);
   }, []);
 
   // Scroll-controlled hero video
