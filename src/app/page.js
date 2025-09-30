@@ -49,25 +49,21 @@ export default function Home() {
 
   // Auto-scroll on page load to show sphere animation
   useEffect(() => {
-    // Wait a moment for everything to load
-    const timer = setTimeout(() => {
-      if (window.lenis) {
-        // Smooth scroll to 50% of the video (100/200 frames)
-        const scrollTarget = window.innerHeight * 1.5; // Roughly 50% of video duration
-        window.lenis.scrollTo(scrollTarget, {
-          duration: 3,
-          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
-        });
-      } else {
-        // Fallback for regular scroll
-        window.scrollTo({
-          top: window.innerHeight * 1.5,
-          behavior: 'smooth'
-        });
-      }
-    }, 500);
-
-    return () => clearTimeout(timer);
+    // Start immediately
+    if (window.lenis) {
+      // Smooth scroll to 75% of the video (150/200 frames)
+      const scrollTarget = window.innerHeight * 2.25; // 75% of video duration
+      window.lenis.scrollTo(scrollTarget, {
+        duration: 3.5,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+      });
+    } else {
+      // Fallback for regular scroll
+      window.scrollTo({
+        top: window.innerHeight * 2.25,
+        behavior: 'smooth'
+      });
+    }
   }, []);
 
   // Scroll-controlled hero video
@@ -446,20 +442,21 @@ export default function Home() {
 
         <section className="marquee-section" style={{
           backgroundColor: 'var(--background)',
-          padding: '2em 0'
+          padding: '1em 0'
         }}>
           <Marquee />
         </section>
 
-
-        <section className="intro" id="intro">
+        <section className="intro" id="intro" style={{
+          paddingTop: '2rem'
+        }}>
           <div className="geo-bg">
             <GeometricBackground />
           </div>
           <div className="intro-container">
             <div className="container">
               <div className="col">
-                <p className="primary">[ Zero to 100 Business Growth ]</p>
+                <p className="primary">[ 0 to 100 Business Growth ]</p>
               </div>
               <div className="col">
                 <div className="intro-copy">
@@ -492,7 +489,7 @@ export default function Home() {
               </div>
               <div className="col">
                 <div className="case-studies-copy">
-                  <h2>How Do We Scale Businesses From Zero to 100?</h2>
+                  <h2>How Do We Scale Businesses From 0 to 100?</h2>
                   <p>
                     We establish your digital foundation with conversion-focused websites that position you as an industry leader. Then, we unlock doors to international markets and Fortune 500 partnerships. Real results: $360,000+ in value delivered, from worldwide expansion to Fortune 500 connections. Your success story is next.
                   </p>
