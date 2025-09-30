@@ -47,6 +47,29 @@ export default function Home() {
     return cleanup;
   }, []);
 
+  // Auto-scroll on page load to show sphere animation
+  useEffect(() => {
+    // Wait a moment for everything to load
+    const timer = setTimeout(() => {
+      if (window.lenis) {
+        // Smooth scroll to 25% of the video scroll distance
+        const scrollTarget = window.innerHeight * 0.25;
+        window.lenis.scrollTo(scrollTarget, {
+          duration: 2.5,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+        });
+      } else {
+        // Fallback for regular scroll
+        window.scrollTo({
+          top: window.innerHeight * 0.25,
+          behavior: 'smooth'
+        });
+      }
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   // Scroll-controlled hero video
   useGSAP(
     () => {
@@ -332,7 +355,7 @@ export default function Home() {
           </div>
           <div className="menu-right">
             <div className="discovery-call-btn">
-              <p>Discovery Call</p>
+              <p>Let's talk</p>
             </div>
           </div>
         </div>
@@ -378,7 +401,7 @@ export default function Home() {
                 </div>
                 <div className="menu-col">
                   <p>hello@Ubushi.com</p>
-                  <p>Schedule a Discovery Call</p>
+                  <p>Let's talk</p>
                 </div>
               </div>
             </div>

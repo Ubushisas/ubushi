@@ -14,7 +14,7 @@
   }
 
   .menu-toggle-label p {
-    font-size: 0.875rem;
+    display: none;
   }
 
   .discovery-call-btn p {
