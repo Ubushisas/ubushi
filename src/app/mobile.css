@@ -2,11 +2,6 @@
 
 /* Base Mobile Styles */
 @media (max-width: 768px) {
-  /* Prevent horizontal overflow */
-  html, body {
-    overflow-x: hidden;
-    width: 100%;
-  }
 
   /* Navigation Menu Mobile */
   .menu-bar {
@@ -76,7 +71,6 @@
     object-fit: cover !important;
     width: 100% !important;
     height: 100% !important;
-    transform: scale(1.2) !important;
     object-position: center center !important;
   }
 
@@ -100,21 +94,25 @@
   /* Container padding for mobile */
   .container {
     padding: 0 1rem;
-    max-width: 100%;
   }
 
   /* Fix column layouts for mobile */
-  .col {
+  .intro .container,
+  .case-studies-content .container,
+  .works-content .container {
+    flex-direction: column;
+  }
+
+  .intro .col,
+  .case-studies-content .col,
+  .works-content .col {
     width: 100%;
-    padding: 0;
   }
 
-  .container .col:first-child {
+  .intro .col:first-child,
+  .case-studies-content .col:first-child,
+  .works-content .col:first-child {
     margin-bottom: 1rem;
-  }
-
-  .container {
-    flex-direction: column !important;
   }
 
   /* Intro Section Mobile */
