@@ -49,12 +49,13 @@
   }
 
   .hero h1 {
-    font-size: 2.5rem;
+    font-size: 3.5rem;
     line-height: 1.2;
     padding: 0 1rem;
     text-align: center;
     position: relative;
     z-index: 2;
+    font-weight: 700;
   }
 
   .hero-copy {
@@ -328,7 +329,7 @@
 /* Small Mobile Devices */
 @media (max-width: 480px) {
   .hero h1 {
-    font-size: 2rem;
+    font-size: 2.8rem;
   }
 
   .hero video {
