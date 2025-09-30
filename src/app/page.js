@@ -390,7 +390,7 @@ export default function Home() {
           <div className="hero-img">
             <video
               ref={heroVideoRef}
-              src="/Sphere.mp4"
+              src="/Sphere-Intro-2.mp4"
               muted
               playsInline
               preload="auto"
@@ -403,7 +403,7 @@ export default function Home() {
                 top: 0,
                 left: 0,
                 backgroundColor: '#000',
-                filter: 'contrast(1.05) saturate(1.1)',
+                filter: 'contrast(1.02) saturate(1.05)',
                 backfaceVisibility: 'hidden',
                 transform: 'translateZ(0) scale(1.01)',
                 willChange: 'transform'
