@@ -52,16 +52,16 @@ export default function Home() {
     // Wait a moment for everything to load
     const timer = setTimeout(() => {
       if (window.lenis) {
-        // Smooth scroll to 25% of the video scroll distance
-        const scrollTarget = window.innerHeight * 0.25;
+        // Smooth scroll to 50% of the video (100/200 frames)
+        const scrollTarget = window.innerHeight * 1.5; // Roughly 50% of video duration
         window.lenis.scrollTo(scrollTarget, {
-          duration: 2.5,
+          duration: 3,
           easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
         });
       } else {
         // Fallback for regular scroll
         window.scrollTo({
-          top: window.innerHeight * 0.25,
+          top: window.innerHeight * 1.5,
           behavior: 'smooth'
         });
       }
