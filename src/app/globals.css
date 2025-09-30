@@ -81,6 +81,16 @@
   box-sizing: border-box;
 }
 
+/* Prevent horizontal scroll on mobile */
+html {
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+  position: relative;
+}
+
 html,
 body {
   width: 100%;

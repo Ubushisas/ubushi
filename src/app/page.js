@@ -15,6 +15,7 @@ import { carouselItems } from "./carouselItems";
 import { initMenu } from "@/utils/menuScript";
 
 import "./home.css";
+import "./mobile.css";
 import "../styles/original-menu.css";
 
 gsap.registerPlugin(useGSAP);
