@@ -58,13 +58,6 @@ export default function Home() {
         const totalScrollDistance = video.duration * 300;
         const scrollTo75Percent = totalScrollDistance * 0.75;
 
-        console.log('Auto-scrolling to frame 150:', {
-          videoDuration: video.duration,
-          totalScrollDistance,
-          scrollTo75Percent,
-          targetFrame: '150 of 200'
-        });
-
         if (window.lenis) {
           window.lenis.scrollTo(scrollTo75Percent, {
             duration: 3.5,
