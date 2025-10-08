@@ -71,6 +71,33 @@ export default function Home() {
     };
   }, []);
 
+  // Enable video for mobile on first user interaction
+  useEffect(() => {
+    const enableVideoOnMobile = () => {
+      const video = heroVideoRef.current;
+      if (video && video.paused) {
+        video.play().then(() => {
+          video.pause();
+          video.currentTime = 0;
+        }).catch(() => {
+          // Silent fail
+        });
+      }
+    };
+
+    // Add listeners for first user interaction
+    const events = ['touchstart', 'click', 'scroll'];
+    events.forEach(event => {
+      document.addEventListener(event, enableVideoOnMobile, { once: true });
+    });
+
+    return () => {
+      events.forEach(event => {
+        document.removeEventListener(event, enableVideoOnMobile);
+      });
+    };
+  }, []);
+
   // Auto-scroll on page load to show sphere animation
   useEffect(() => {
     const performAutoScroll = () => {
@@ -117,6 +144,13 @@ export default function Home() {
 
       const initVideoScroll = () => {
         const videoDuration = video.duration;
+
+        // Ensure video is ready for mobile - play then pause to enable currentTime control
+        video.play().then(() => {
+          video.pause();
+        }).catch(() => {
+          // Silent fail - some browsers may block
+        });
 
         // Calculate scroll distance - about 300px per second of video
         const scrollDistance = videoDuration * 300;
