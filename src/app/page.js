@@ -105,6 +105,32 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, []);
 
+  // Initialize video for mobile devices
+  useEffect(() => {
+    const video = heroVideoRef.current;
+    if (!video) return;
+
+    const initMobileVideo = async () => {
+      try {
+        // On mobile, play and pause to enable programmatic seeking
+        await video.play();
+        video.pause();
+        video.currentTime = 0;
+      } catch (error) {
+        console.log('Video initialization:', error);
+      }
+    };
+
+    // Check if mobile device
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    if (isMobile) {
+      video.addEventListener('loadeddata', initMobileVideo);
+      return () => {
+        video.removeEventListener('loadeddata', initMobileVideo);
+      };
+    }
+  }, []);
+
   // Scroll-controlled hero video
   useGSAP(
     () => {
@@ -765,7 +791,9 @@ export default function Home() {
               ref={heroVideoRef}
               src="/Sphere_white.mp4"
               muted
+              autoPlay
               playsInline
+              webkit-playsinline="true"
               preload="auto"
               style={{
                 width: '100vw',
