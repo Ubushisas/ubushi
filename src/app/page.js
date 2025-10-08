@@ -30,22 +30,6 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [menuImage, setMenuImage] = useState("/images/home/Menu-picture.jpg");
   const [imageOpacity, setImageOpacity] = useState(1);
-  const [shouldLoadVideo, setShouldLoadVideo] = useState(true);
-
-  // Check if video should be loaded based on screen size
-  useEffect(() => {
-    const checkScreenSize = () => {
-      // Only load video on tablet and desktop (width > 768px)
-      setShouldLoadVideo(window.innerWidth > 768);
-    };
-
-    checkScreenSize();
-    window.addEventListener('resize', checkScreenSize);
-
-    return () => {
-      window.removeEventListener('resize', checkScreenSize);
-    };
-  }, []);
 
   // initialize Lenis smooth scrolling instance on window
   const lenis = useLenis();
@@ -89,9 +73,6 @@ export default function Home() {
 
   // Auto-scroll on page load to show sphere animation
   useEffect(() => {
-    // Skip auto-scroll on mobile devices
-    if (!shouldLoadVideo) return;
-
     const performAutoScroll = () => {
       const video = heroVideoRef.current;
       if (video && video.duration) {
@@ -122,13 +103,10 @@ export default function Home() {
     const timer = setTimeout(performAutoScroll, 100);
 
     return () => clearTimeout(timer);
-  }, [shouldLoadVideo]);
+  }, []);
 
-  // Initialize video for mobile devices (only for tablets, not phones)
+  // Initialize video for mobile devices
   useEffect(() => {
-    // Skip if video not loaded
-    if (!shouldLoadVideo) return;
-
     const video = heroVideoRef.current;
     if (!video) return;
 
@@ -143,7 +121,7 @@ export default function Home() {
       }
     };
 
-    // Check if mobile device (this will be tablets since shouldLoadVideo is true)
+    // Check if mobile device
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     if (isMobile) {
       video.addEventListener('loadeddata', initMobileVideo);
@@ -151,14 +129,11 @@ export default function Home() {
         video.removeEventListener('loadeddata', initMobileVideo);
       };
     }
-  }, [shouldLoadVideo]);
+  }, []);
 
   // Scroll-controlled hero video
   useGSAP(
     () => {
-      // Skip video scroll setup on mobile devices
-      if (!shouldLoadVideo) return;
-
       const video = heroVideoRef.current;
       const heroSection = heroSectionRef.current;
 
@@ -812,42 +787,29 @@ export default function Home() {
       <div className="app" ref={container}>
         <section className="hero" ref={heroSectionRef}>
           <div className="hero-img">
-            {shouldLoadVideo ? (
-              <video
-                ref={heroVideoRef}
-                src="/Sphere_white.mp4"
-                muted
-                autoPlay
-                playsInline
-                webkit-playsinline="true"
-                preload="auto"
-                style={{
-                  width: '100vw',
-                  height: '100vh',
-                  objectFit: 'cover',
-                  objectPosition: 'center center',
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  backgroundColor: '#000',
-                  filter: 'contrast(1.02) saturate(1.05)',
-                  backfaceVisibility: 'hidden',
-                  transform: 'translateZ(0) scale(1.01)',
-                  willChange: 'transform'
-                }}
-              />
-            ) : (
-              <div
-                style={{
-                  width: '100vw',
-                  height: '100vh',
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  backgroundColor: '#ffffff'
-                }}
-              />
-            )}
+            <video
+              ref={heroVideoRef}
+              src="/Sphere_white.mp4"
+              muted
+              autoPlay
+              playsInline
+              webkit-playsinline="true"
+              preload="auto"
+              style={{
+                width: '100vw',
+                height: '100vh',
+                objectFit: 'cover',
+                objectPosition: 'center center',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                backgroundColor: '#000',
+                filter: 'contrast(1.02) saturate(1.05)',
+                backfaceVisibility: 'hidden',
+                transform: 'translateZ(0) scale(1.01)',
+                willChange: 'transform'
+              }}
+            />
           </div>
           <div className="hero-img-gradient"></div>
           <div className="container">
