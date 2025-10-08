@@ -759,9 +759,7 @@ export default function Home() {
             <video
               ref={heroVideoRef}
               src="/Sphere_white.mp4"
-              autoPlay
               muted
-              loop
               playsInline
               preload="auto"
               style={{
