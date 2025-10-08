@@ -73,53 +73,36 @@ export default function Home() {
 
   // Auto-scroll on page load to show sphere animation
   useEffect(() => {
-    let hasScrolled = false;
-    let scrollTimeout;
-
     const performAutoScroll = () => {
-      // Prevent multiple scroll attempts
-      if (hasScrolled) return;
-
       const video = heroVideoRef.current;
-
-      // Check if video is loaded and ScrollTrigger is ready
-      if (video && video.duration && video.readyState >= 3) {
-        hasScrolled = true;
-
+      if (video && video.duration) {
         // Calculate exact scroll distance for 75% of video (150/200 frames)
         // Video scroll distance = duration * 300 (from ScrollTrigger setup)
         const totalScrollDistance = video.duration * 300;
         const scrollTo75Percent = totalScrollDistance * 0.75;
 
-        // Wait for all ScrollTriggers to be fully initialized
-        scrollTimeout = setTimeout(() => {
-          // Ensure we start at top
-          window.scrollTo(0, 0);
-
-          // Small delay to ensure scroll reset
-          setTimeout(() => {
-            if (window.lenis) {
-              window.lenis.scrollTo(scrollTo75Percent, {
-                duration: 3.5,
-                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
-              });
-            }
-          }, 100);
-        }, 800);
+        if (window.lenis) {
+          window.lenis.scrollTo(scrollTo75Percent, {
+            duration: 3.5,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+          });
+        } else {
+          // Fallback for regular scroll
+          window.scrollTo({
+            top: scrollTo75Percent,
+            behavior: 'smooth'
+          });
+        }
       } else {
-        // Video not ready - retry
-        scrollTimeout = setTimeout(performAutoScroll, 300);
+        // Fallback if video not ready - retry after short delay
+        setTimeout(performAutoScroll, 500);
       }
     };
 
-    // Start after brief delay
-    const initTimer = setTimeout(performAutoScroll, 500);
+    // Start immediately, no delay
+    const timer = setTimeout(performAutoScroll, 100);
 
-    return () => {
-      clearTimeout(initTimer);
-      clearTimeout(scrollTimeout);
-      hasScrolled = true;
-    };
+    return () => clearTimeout(timer);
   }, []);
 
   // Initialize video for mobile devices
