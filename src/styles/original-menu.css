@@ -48,6 +48,7 @@
   pointer-events: all;
   z-index: 9999999;
   position: relative;
+  background-color: var(--foreground);
 }
 
 .discovery-call-btn:hover {
@@ -59,12 +60,12 @@
   font-family: "PP Neue Montreal", "Inter", sans-serif;
   font-size: 0.95rem;
   font-weight: 500;
-  color: var(--foreground);
+  color: var(--background);
   transition: color 0.3s ease;
 }
 
 .discovery-call-btn:hover p {
-  color: var(--background);
+  color: var(--foreground);
 }
 
 .menu-logo {
@@ -147,7 +148,7 @@
 }
 
 .menu-overlay {
-  background-color: #0f0f0f;
+  background-color: #ffffff;
   clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%);
   will-change: clip-path;
 }

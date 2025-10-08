@@ -31,7 +31,7 @@ const ShuffleText = ({
 
   useEffect(() => {
     if (!isDesktop) {
-      // show the text without animation on mobile
+      // Show text without animation on mobile/tablet
       if (splitInstance.current) {
         splitInstance.current.revert();
         splitInstance.current = null;

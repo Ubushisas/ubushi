@@ -1,0 +1,410 @@
+/* Tablet/iPad Responsive Styles */
+
+/* Tablet Portrait and Landscape */
+@media (min-width: 769px) and (max-width: 1024px) {
+
+  /* Navigation Menu Tablet */
+  .menu-bar {
+    padding: 1.5rem 2rem;
+    height: 70px;
+  }
+
+  .menu-logo h3 {
+    font-size: 1.75rem;
+  }
+
+  .discovery-call-btn p {
+    font-size: 1rem;
+  }
+
+  /* Menu Overlay Tablet */
+  .menu-overlay-content {
+    flex-direction: row;
+  }
+
+  .menu-media-wrapper {
+    width: 55%;
+    height: 100%;
+    display: block !important;
+  }
+
+  .menu-media-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+  }
+
+  .menu-content-wrapper {
+    width: 45%;
+    padding: 2rem;
+  }
+
+  .menu-link p {
+    font-size: 1rem !important;
+    line-height: 1.6 !important;
+  }
+
+  /* Hero Section Tablet */
+  .hero {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #ffffff !important;
+  }
+
+  .hero h1 {
+    font-size: 5rem;
+    line-height: 0.95;
+    text-align: center;
+  }
+
+  .hero-copy {
+    padding: 2rem 1rem;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+
+  .hero-copy::before {
+    display: none !important;
+  }
+
+  .hero video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    object-position: center center !important;
+    transform: scale(1.0) !important;
+    background-color: #ffffff !important;
+  }
+
+  .hero-img {
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff !important;
+  }
+
+  .hero-img::after {
+    content: '' !important;
+    position: absolute !important;
+    bottom: 350px !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 250px !important;
+    background: linear-gradient(to bottom,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.05) 10%,
+      rgba(255, 255, 255, 0.2) 20%,
+      rgba(255, 255, 255, 0.45) 30%,
+      rgba(255, 255, 255, 0.7) 40%,
+      rgba(255, 255, 255, 0.85) 50%,
+      rgba(255, 255, 255, 0.93) 60%,
+      rgba(255, 255, 255, 0.97) 70%,
+      rgba(255, 255, 255, 0.99) 80%,
+      rgba(255, 255, 255, 1) 85%,
+      rgba(255, 255, 255, 1) 90%,
+      rgba(255, 255, 255, 1) 100%) !important;
+    z-index: 10 !important;
+    pointer-events: none !important;
+  }
+
+  .hero-img-gradient {
+    display: none !important;
+  }
+
+  /* Container padding for tablet */
+  .container {
+    padding: 0 2rem;
+  }
+
+  /* Intro Section Tablet */
+  .intro {
+    padding-top: 3rem;
+    padding-bottom: 2rem;
+  }
+
+  .intro-container {
+    padding: 2rem;
+  }
+
+  .intro-copy p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+  /* Case Studies Tablet */
+  .case-studies {
+    padding-top: 3rem;
+  }
+
+  .case-studies-header h2 {
+    font-size: 4.5rem;
+    letter-spacing: -0.2rem;
+  }
+
+  .case-studies-content {
+    padding: 2rem;
+  }
+
+  .case-studies-copy h2 {
+    font-size: 1.4rem;
+    line-height: 1.3;
+  }
+
+  .case-studies-copy p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+  /* Case Studies Items - Show both text and images side by side */
+  .case-studies-items {
+    display: flex !important;
+    flex-direction: row !important;
+  }
+
+  .case-studies-items-content {
+    width: 55% !important;
+    flex: none !important;
+  }
+
+  .case-studies-items-images {
+    display: block !important;
+    width: 45% !important;
+    flex: none !important;
+  }
+
+  .case-studies-item {
+    height: 100vh;
+    padding: 3rem 0;
+  }
+
+  .case-studies-items-content .container h3 {
+    font-size: 3rem;
+    line-height: 1.2;
+  }
+
+  .case-studies-items-content .container p {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  /* Ensure overlay doesn't cover gradient in case studies */
+  .case-studies-img .hero-img-overlay {
+    z-index: 1 !important;
+  }
+
+  /* Semi-strong gradients for CAROUSEL Case Studies - TABLET */
+  #project-01 .project-bg::before,
+  #project-02 .project-bg::before,
+  #project-03 .project-bg::before {
+    content: '' !important;
+    display: block !important;
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    height: 70% !important;
+    background: linear-gradient(to top,
+      rgba(0, 0, 0, 0.85) 0%,
+      rgba(0, 0, 0, 0.75) 15%,
+      rgba(0, 0, 0, 0.65) 30%,
+      rgba(0, 0, 0, 0.5) 45%,
+      rgba(0, 0, 0, 0.35) 60%,
+      rgba(0, 0, 0, 0.2) 75%,
+      rgba(0, 0, 0, 0.08) 90%,
+      rgba(0, 0, 0, 0) 100%) !important;
+    pointer-events: none !important;
+    z-index: 2 !important;
+  }
+
+  /* Ensure text is on top of gradient - TABLET */
+  #project-01 .project-header,
+  #project-02 .project-header,
+  #project-03 .project-header {
+    position: relative !important;
+    z-index: 10 !important;
+  }
+
+  /* Background image lowest layer - TABLET */
+  #project-01 .project-bg,
+  #project-02 .project-bg,
+  #project-03 .project-bg {
+    z-index: 1 !important;
+  }
+
+  /* Move text 70px lower on all three case studies */
+  .case-studies-item-1 .container,
+  .case-studies-item-2 .container,
+  .case-studies-item-3 .container {
+    padding-top: 70px !important;
+  }
+
+  .case-studies-item-1 h3,
+  .case-studies-item-2 h3,
+  .case-studies-item-3 h3 {
+    margin-top: 70px !important;
+  }
+
+  /* Hide mobile duplicate images on tablet */
+  .case-studies-item-inner-img {
+    display: none !important;
+  }
+
+  .case-studies-item-inner-link {
+    display: none !important;
+  }
+
+  /* Works Section Tablet */
+  .works {
+    padding: 3rem 0;
+  }
+
+  .works-header h2 {
+    font-size: 4.5rem;
+    letter-spacing: -0.2rem;
+  }
+
+  .works-content {
+    padding: 2rem;
+  }
+
+  .works-copy h2 {
+    font-size: 1.4rem;
+    line-height: 1.3;
+  }
+
+  .works-copy p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+  /* Carousel Tablet */
+  .carousel {
+    min-height: 100vh;
+  }
+
+  .carousel .hero-img-gradient {
+    display: block !important;
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    top: auto !important;
+    width: 100% !important;
+    height: 650px !important;
+    background: linear-gradient(to top,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 1) 5%,
+      rgba(0, 0, 0, 0.98) 10%,
+      rgba(0, 0, 0, 0.95) 18%,
+      rgba(0, 0, 0, 0.88) 28%,
+      rgba(0, 0, 0, 0.78) 38%,
+      rgba(0, 0, 0, 0.65) 48%,
+      rgba(0, 0, 0, 0.5) 58%,
+      rgba(0, 0, 0, 0.35) 68%,
+      rgba(0, 0, 0, 0.2) 78%,
+      rgba(0, 0, 0, 0.08) 88%,
+      rgba(0, 0, 0, 0) 100%) !important;
+    pointer-events: none !important;
+    z-index: 999 !important;
+  }
+
+  .carousel .hero-img-overlay {
+    background: linear-gradient(
+      rgb(255 255 255 / 0.015),
+      rgb(255 255 255 / 0.015) 4px,
+      transparent 4px,
+      transparent 9px
+    );
+  }
+
+  .project-header {
+    flex-direction: row;
+    align-items: center;
+    padding: 2rem;
+    gap: 1rem;
+    top: 50%;
+    transform: translate(0%, calc(-50% + 170px));
+  }
+
+  .project-id h2 {
+    font-size: 3rem;
+    font-weight: 700;
+  }
+
+  .project-title h2 {
+    font-size: 2.25rem;
+    font-weight: 400;
+  }
+
+  .project-main {
+    width: 45%;
+    height: auto;
+    aspect-ratio: 1;
+    top: 50%;
+  }
+
+  /* Footer Tablet */
+  footer {
+    padding: 3rem 2rem;
+  }
+
+  .footer-header h2 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+  }
+
+  .footer-links {
+    flex-direction: row;
+    gap: 3rem;
+  }
+
+  .footer-links-col {
+    width: auto;
+    flex: 1;
+  }
+
+  /* Abstract Background Tablet */
+  .abstract-bg {
+    min-height: 60vh;
+  }
+
+  /* Geometric Background Tablet */
+  .geo-bg {
+    transform: scale(1.5);
+  }
+
+  /* Primary text sizing */
+  .primary {
+    font-size: 1.5rem;
+  }
+}
+
+/* Tablet Portrait Specific */
+@media (min-width: 769px) and (max-width: 834px) and (orientation: portrait) {
+  .hero h1 {
+    font-size: 4.5rem;
+  }
+
+  .case-studies-header h2,
+  .works-header h2 {
+    font-size: 4rem;
+  }
+
+  .project-main {
+    width: 50%;
+  }
+}
+
+/* Tablet Landscape Specific */
+@media (min-width: 1000px) and (max-width: 1024px) and (orientation: landscape) {
+  .hero h1 {
+    font-size: 5.5rem;
+  }
+
+  .project-main {
+    width: 40%;
+  }
+}
