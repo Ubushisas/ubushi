@@ -105,32 +105,6 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, []);
 
-  // Initialize video for mobile devices
-  useEffect(() => {
-    const video = heroVideoRef.current;
-    if (!video) return;
-
-    const initMobileVideo = async () => {
-      try {
-        // On mobile, play and pause to enable programmatic seeking
-        await video.play();
-        video.pause();
-        video.currentTime = 0;
-      } catch (error) {
-        console.log('Video initialization:', error);
-      }
-    };
-
-    // Check if mobile device
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    if (isMobile) {
-      video.addEventListener('loadeddata', initMobileVideo);
-      return () => {
-        video.removeEventListener('loadeddata', initMobileVideo);
-      };
-    }
-  }, []);
-
   // Scroll-controlled hero video
   useGSAP(
     () => {
@@ -231,9 +205,8 @@ export default function Home() {
   useGSAP(
     () => {
       const isMobile = window.innerWidth <= 768;
-      const triggers = [];
 
-      triggers.push(ScrollTrigger.create({
+      ScrollTrigger.create({
         trigger: ".intro",
         start: "top bottom",
         end: "bottom top",
@@ -254,12 +227,12 @@ export default function Home() {
             overwrite: true,
           });
         },
-      }));
+      });
 
       // Video autoplay on scroll
       const video = document.querySelector('[data-autoplay-on-scroll]');
       if (video) {
-        triggers.push(ScrollTrigger.create({
+        ScrollTrigger.create({
           trigger: video,
           start: "top 80%",
           end: "bottom 20%",
@@ -267,14 +240,14 @@ export default function Home() {
           onLeave: () => video.pause(),
           onEnterBack: () => video.play(),
           onLeaveBack: () => video.pause(),
-        }));
+        });
       }
 
       // Add parallax effect and fade-in animations on mobile
       if (isMobile) {
         // Parallax effect for sections
         gsap.utils.toArray("section").forEach((section, i) => {
-          triggers.push(ScrollTrigger.create({
+          ScrollTrigger.create({
             trigger: section,
             start: "top bottom",
             end: "bottom top",
@@ -286,12 +259,12 @@ export default function Home() {
                 overwrite: "auto",
               });
             },
-          }));
+          });
         });
 
         // Fade-in animations for content
         gsap.utils.toArray(".intro-copy p, .case-studies-copy p, .works-copy p").forEach((el) => {
-          triggers.push(ScrollTrigger.create({
+          ScrollTrigger.create({
             trigger: el,
             start: "top 90%",
             once: true,
@@ -301,12 +274,12 @@ export default function Home() {
                 { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }
               );
             },
-          }));
+          });
         });
 
         // Animate headings on mobile
         gsap.utils.toArray("h2, h3").forEach((heading) => {
-          triggers.push(ScrollTrigger.create({
+          ScrollTrigger.create({
             trigger: heading,
             start: "top 85%",
             once: true,
@@ -316,7 +289,7 @@ export default function Home() {
                 { opacity: 1, scale: 1, duration: 0.6, ease: "power2.out" }
               );
             },
-          }));
+          });
         });
       }
 
@@ -327,7 +300,7 @@ export default function Home() {
       }, 200);
 
       return () => {
-        triggers.forEach((trigger) => trigger && trigger.kill());
+        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
       };
     },
     { scope: container }
@@ -337,7 +310,6 @@ export default function Home() {
   useGSAP(
     () => {
       const isMobile = window.innerWidth <= 768;
-      const triggers = [];
 
       // Wait for images to be in DOM
       const initCaseStudiesAnimations = () => {
@@ -355,7 +327,7 @@ export default function Home() {
           if (!imgElement) return;
 
           // Scale animation - subtle zoom from 1 to 1.2
-          triggers.push(ScrollTrigger.create({
+          ScrollTrigger.create({
             trigger: img,
             start: "top bottom",
             end: "top top",
@@ -368,11 +340,11 @@ export default function Home() {
                 overwrite: true,
               });
             },
-          }));
+          });
 
           // Pin animation (disable on mobile for better performance)
           if (!isMobile) {
-            triggers.push(ScrollTrigger.create({
+            ScrollTrigger.create({
               trigger: img,
               start: "top top",
               end: () => {
@@ -383,7 +355,7 @@ export default function Home() {
               pin: true,
               pinSpacing: false,
               invalidateOnRefresh: true,
-            }));
+            });
           }
         });
 
@@ -397,7 +369,7 @@ export default function Home() {
       initCaseStudiesAnimations();
 
       return () => {
-        triggers.forEach((trigger) => trigger && trigger.kill());
+        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
       };
     },
     { scope: container }
@@ -408,10 +380,9 @@ export default function Home() {
     () => {
       const strips = gsap.utils.toArray(".strip");
       const isMobile = window.innerWidth <= 768;
-      const triggers = [];
 
       strips.forEach((strip, i) => {
-        triggers.push(ScrollTrigger.create({
+        ScrollTrigger.create({
           trigger: strip,
           start: "top bottom",
           end: "bottom top",
@@ -437,11 +408,11 @@ export default function Home() {
               });
             }
           },
-        }));
+        });
       });
 
       return () => {
-        triggers.forEach((trigger) => trigger && trigger.kill());
+        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
       };
     },
     { scope: container }
@@ -455,10 +426,8 @@ export default function Home() {
       const buttonText = document.querySelector(".discovery-call-btn p");
       if (!logo) return;
 
-      const triggers = [];
-
       // Logo color change for works section
-      triggers.push(ScrollTrigger.create({
+      ScrollTrigger.create({
         trigger: ".works",
         start: "top center",
         end: "bottom center",
@@ -490,11 +459,11 @@ export default function Home() {
             ease: "power2.out",
           });
         },
-      }));
+      });
 
       // Button color change for works section
       if (button && buttonText) {
-        triggers.push(ScrollTrigger.create({
+        ScrollTrigger.create({
           trigger: ".works",
           start: "top center",
           end: "bottom center",
@@ -550,10 +519,10 @@ export default function Home() {
               ease: "power2.out",
             });
           },
-        }));
+        });
 
         // Button color change for case studies images section
-        triggers.push(ScrollTrigger.create({
+        ScrollTrigger.create({
           trigger: ".case-studies-items-images",
           start: "top center",
           end: "bottom center",
@@ -609,11 +578,11 @@ export default function Home() {
               ease: "power2.out",
             });
           },
-        }));
+        });
       }
 
       return () => {
-        triggers.forEach((trigger) => trigger && trigger.kill());
+        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
       };
     },
     { scope: container }
@@ -630,7 +599,7 @@ export default function Home() {
       // Footer is now always visible but content is hidden
       // The black background is always there, only content fades in
 
-      const carouselTrigger = ScrollTrigger.create({
+      ScrollTrigger.create({
         trigger: ".carousel",
         start: "top top",
         end: `+=${window.innerHeight * (projects.length - 1)}`,
@@ -688,7 +657,7 @@ export default function Home() {
       });
 
       return () => {
-        if (carouselTrigger) carouselTrigger.kill();
+        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
       };
     },
     { scope: container }
@@ -791,9 +760,7 @@ export default function Home() {
               ref={heroVideoRef}
               src="/Sphere_white.mp4"
               muted
-              autoPlay
               playsInline
-              webkit-playsinline="true"
               preload="auto"
               style={{
                 width: '100vw',

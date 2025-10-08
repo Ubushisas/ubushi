@@ -581,83 +581,8 @@
   }
 }
 
-/* Very Small Mobile Devices - iPhone 12 mini, iPhone SE */
-@media (max-width: 390px) {
-  /* Hide menu pictures on very small screens */
-  .menu-media-wrapper {
-    display: none !important;
-  }
-
-  .menu-content-wrapper {
-    margin-top: 0 !important;
-    padding-top: 2rem !important;
-  }
-
-  /* Menu bar fixes for very small phones */
-  .menu-bar {
-    padding: 0.75rem;
-    height: 56px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .menu-logo h3 {
-    font-size: 1.25rem;
-  }
-
-  .discovery-call-btn {
-    padding: 0.5rem 0.75rem !important;
-    min-width: auto !important;
-  }
-
-  .discovery-call-btn p {
-    font-size: 0.75rem;
-  }
-
-  .menu-toggle-btn {
-    gap: 0.5rem;
-  }
-}
-
-/* Small Mobile Devices - iPhone 12, iPhone 14 and similar */
-@media (min-width: 391px) and (max-width: 480px) {
-  /* Keep menu pictures on larger small phones */
-  .menu-media-wrapper {
-    display: block !important;
-    height: 40vh;
-  }
-
-  /* Menu bar fixes for small phones */
-  .menu-bar {
-    padding: 0.75rem;
-    height: 56px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .menu-logo h3 {
-    font-size: 1.25rem;
-  }
-
-  .discovery-call-btn {
-    padding: 0.5rem 0.75rem !important;
-    min-width: auto !important;
-  }
-
-  .discovery-call-btn p {
-    font-size: 0.75rem;
-  }
-
-  .menu-toggle-btn {
-    gap: 0.5rem;
-  }
-}
-
-/* General Small Mobile Typography */
+/* Small Mobile Devices */
 @media (max-width: 480px) {
-
   .hero h1 {
     font-size: 2.5rem;
   }
