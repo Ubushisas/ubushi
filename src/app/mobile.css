@@ -723,6 +723,14 @@
   }
 }
 
+/* iPhone 12 mini specific - 375x812 */
+@media (max-width: 375px) and (min-height: 800px) {
+  /* Move gradient 30px lower for iPhone 12 mini */
+  .hero-img::after {
+    bottom: 90px !important;
+  }
+}
+
 /* Landscape Mobile */
 @media (max-width: 768px) and (orientation: landscape) {
   .hero {
