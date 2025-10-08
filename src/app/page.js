@@ -73,36 +73,55 @@ export default function Home() {
 
   // Auto-scroll on page load to show sphere animation
   useEffect(() => {
+    let hasScrolled = false;
+    let attemptCount = 0;
+    const maxAttempts = 10;
+
     const performAutoScroll = () => {
+      // Prevent multiple scroll attempts
+      if (hasScrolled) return;
+
       const video = heroVideoRef.current;
-      if (video && video.duration) {
+      if (video && video.duration && video.readyState >= 2) {
+        // Video is ready with enough data
+        hasScrolled = true;
+
         // Calculate exact scroll distance for 75% of video (150/200 frames)
         // Video scroll distance = duration * 300 (from ScrollTrigger setup)
         const totalScrollDistance = video.duration * 300;
         const scrollTo75Percent = totalScrollDistance * 0.75;
 
-        if (window.lenis) {
-          window.lenis.scrollTo(scrollTo75Percent, {
-            duration: 3.5,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
-          });
-        } else {
-          // Fallback for regular scroll
-          window.scrollTo({
-            top: scrollTo75Percent,
-            behavior: 'smooth'
-          });
-        }
-      } else {
-        // Fallback if video not ready - retry after short delay
-        setTimeout(performAutoScroll, 500);
+        // Wait for ScrollTrigger to be initialized
+        setTimeout(() => {
+          if (window.lenis) {
+            window.lenis.scrollTo(scrollTo75Percent, {
+              duration: 3.5,
+              easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+              lock: true,
+              force: true
+            });
+          } else {
+            // Fallback for regular scroll
+            window.scrollTo({
+              top: scrollTo75Percent,
+              behavior: 'smooth'
+            });
+          }
+        }, 500);
+      } else if (attemptCount < maxAttempts) {
+        // Video not ready - retry after short delay
+        attemptCount++;
+        setTimeout(performAutoScroll, 200);
       }
     };
 
-    // Start immediately, no delay
-    const timer = setTimeout(performAutoScroll, 100);
+    // Start after a brief delay to ensure everything is initialized
+    const timer = setTimeout(performAutoScroll, 300);
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      hasScrolled = true; // Prevent any pending attempts
+    };
   }, []);
 
   // Initialize video for mobile devices
