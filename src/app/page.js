@@ -599,7 +599,7 @@ export default function Home() {
       // Footer is now always visible but content is hidden
       // The black background is always there, only content fades in
 
-      ScrollTrigger.create({
+      const carouselTrigger = ScrollTrigger.create({
         trigger: ".carousel",
         start: "top top",
         end: `+=${window.innerHeight * (projects.length - 1)}`,
@@ -657,7 +657,7 @@ export default function Home() {
       });
 
       return () => {
-        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+        if (carouselTrigger) carouselTrigger.kill();
       };
     },
     { scope: container }
