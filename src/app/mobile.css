@@ -43,6 +43,13 @@
     width: 100%;
     padding: 0 1rem;
     margin-top: -80px;
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 45vh);
+  }
+
+  .menu-links {
+    flex: 0 0 auto;
   }
 
   .menu-link p {
@@ -51,7 +58,13 @@
   }
 
   .menu-footer {
-    margin-top: 2rem;
+    margin-top: auto;
+    padding-bottom: 2rem;
+  }
+
+  .menu-footer .menu-col:last-child {
+    display: flex;
+    flex-direction: column-reverse;
   }
 
   .menu-footer .menu-col p {
@@ -578,6 +591,76 @@
   /* Geometric Background Mobile */
   .geo-bg {
     transform: scale(0.5);
+  }
+}
+
+/* Big Mobile Devices - iPhone 12, iPhone 14, etc (376px - 768px) */
+@media (min-width: 376px) and (max-width: 768px) {
+  .menu-content-wrapper {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: calc(100vh - 45vh) !important;
+  }
+
+  .menu-links {
+    flex: 0 0 auto;
+  }
+
+  .menu-footer {
+    margin-top: auto !important;
+  }
+}
+
+/* Very Small Mobile Devices - iPhone SE, iPhone 8, etc (375x667) */
+@media (max-width: 375px) {
+  /* Hide menu pictures and center content */
+  .menu-media-wrapper {
+    display: none !important;
+  }
+
+  .menu-content-wrapper {
+    margin-top: 0 !important;
+    padding-top: 3rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 100vh !important;
+  }
+
+  .menu-links {
+    text-align: center;
+    flex: 0 0 auto;
+  }
+
+  .menu-footer {
+    margin-top: auto !important;
+    padding-bottom: 2rem;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 2rem;
+    padding-left: 1rem;
+  }
+
+  .menu-footer .menu-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .menu-footer .menu-col:first-child {
+    align-items: center;
+  }
+
+  .menu-footer .menu-col:last-child {
+    display: flex !important;
+    flex-direction: column-reverse !important;
+    align-items: center !important;
+  }
+
+  .menu-footer .menu-col p {
+    margin: 0.25rem 0 !important;
   }
 }
 

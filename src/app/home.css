@@ -939,6 +939,23 @@
     width: 45% !important;
     min-width: 45% !important;
     max-width: 45% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 100vh !important;
+  }
+
+  .menu-links {
+    flex: 0 0 auto;
+  }
+
+  .menu-footer {
+    margin-top: auto !important;
+    padding-bottom: 2rem;
+  }
+
+  .menu-footer .menu-col:last-child {
+    display: flex;
+    flex-direction: column-reverse;
   }
 }
 

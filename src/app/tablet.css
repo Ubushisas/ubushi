@@ -38,11 +38,28 @@
   .menu-content-wrapper {
     width: 45%;
     padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .menu-links {
+    flex: 0 0 auto;
   }
 
   .menu-link p {
     font-size: 1rem !important;
     line-height: 1.6 !important;
+  }
+
+  .menu-footer {
+    margin-top: auto;
+    padding-bottom: 2rem;
+  }
+
+  .menu-footer .menu-col:last-child {
+    display: flex;
+    flex-direction: column-reverse;
   }
 
   /* Hero Section Tablet */
