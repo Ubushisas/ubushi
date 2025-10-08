@@ -133,7 +133,7 @@
 
   .hero-img::after {
     content: '';
-    position: absolute;
+    position: fixed;
     bottom: 200px;
     left: 0;
     width: 100%;
@@ -497,7 +497,7 @@
   }
 
   .pin-spacer {
-    background-color: #000000 !important;
+    background-color: transparent !important;
   }
 
   /* Footer Mobile - Add 250px to top with white background */
@@ -613,6 +613,16 @@
 
 /* Very Small Mobile Devices - iPhone SE, iPhone 8, etc (375x667) */
 @media (max-width: 375px) {
+  /* Move gradient higher on small phones */
+  .hero-img::after {
+    bottom: 120px !important;
+  }
+
+  /* Move title lower on small phones */
+  .hero-copy {
+    transform: translateY(-75px) !important;
+  }
+
   /* Hide menu pictures and center content */
   .menu-media-wrapper {
     display: none !important;
