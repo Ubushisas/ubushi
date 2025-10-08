@@ -725,7 +725,7 @@ export default function Home() {
                 <div className="menu-col">
                   <div className="menu-link">
                     <p style={{fontSize: '1.1rem', lineHeight: '1.6', marginBottom: '1rem'}}>
-                      We are Pedro and Lis. We are the founders of <strong>Ubushi</strong>.
+                      We are Pedro and Lis. We are the founders of <strong>Ubushi.</strong>
                     </p>
                     <p style={{fontSize: '1.1rem', lineHeight: '1.6', marginBottom: '1rem'}}>
                       Our mission is to help companies around the world become the main hubs for their customers—and, of course, their partners—through our <strong>Ubushi network</strong>.
@@ -759,7 +759,9 @@ export default function Home() {
             <video
               ref={heroVideoRef}
               src="/Sphere_white.mp4"
+              autoPlay
               muted
+              loop
               playsInline
               preload="auto"
               style={{
