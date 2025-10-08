@@ -205,8 +205,9 @@ export default function Home() {
   useGSAP(
     () => {
       const isMobile = window.innerWidth <= 768;
+      const triggers = [];
 
-      ScrollTrigger.create({
+      triggers.push(ScrollTrigger.create({
         trigger: ".intro",
         start: "top bottom",
         end: "bottom top",
@@ -227,12 +228,12 @@ export default function Home() {
             overwrite: true,
           });
         },
-      });
+      }));
 
       // Video autoplay on scroll
       const video = document.querySelector('[data-autoplay-on-scroll]');
       if (video) {
-        ScrollTrigger.create({
+        triggers.push(ScrollTrigger.create({
           trigger: video,
           start: "top 80%",
           end: "bottom 20%",
@@ -240,14 +241,14 @@ export default function Home() {
           onLeave: () => video.pause(),
           onEnterBack: () => video.play(),
           onLeaveBack: () => video.pause(),
-        });
+        }));
       }
 
       // Add parallax effect and fade-in animations on mobile
       if (isMobile) {
         // Parallax effect for sections
         gsap.utils.toArray("section").forEach((section, i) => {
-          ScrollTrigger.create({
+          triggers.push(ScrollTrigger.create({
             trigger: section,
             start: "top bottom",
             end: "bottom top",
@@ -259,12 +260,12 @@ export default function Home() {
                 overwrite: "auto",
               });
             },
-          });
+          }));
         });
 
         // Fade-in animations for content
         gsap.utils.toArray(".intro-copy p, .case-studies-copy p, .works-copy p").forEach((el) => {
-          ScrollTrigger.create({
+          triggers.push(ScrollTrigger.create({
             trigger: el,
             start: "top 90%",
             once: true,
@@ -274,12 +275,12 @@ export default function Home() {
                 { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }
               );
             },
-          });
+          }));
         });
 
         // Animate headings on mobile
         gsap.utils.toArray("h2, h3").forEach((heading) => {
-          ScrollTrigger.create({
+          triggers.push(ScrollTrigger.create({
             trigger: heading,
             start: "top 85%",
             once: true,
@@ -289,7 +290,7 @@ export default function Home() {
                 { opacity: 1, scale: 1, duration: 0.6, ease: "power2.out" }
               );
             },
-          });
+          }));
         });
       }
 
@@ -300,7 +301,7 @@ export default function Home() {
       }, 200);
 
       return () => {
-        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+        triggers.forEach((trigger) => trigger && trigger.kill());
       };
     },
     { scope: container }
@@ -310,6 +311,7 @@ export default function Home() {
   useGSAP(
     () => {
       const isMobile = window.innerWidth <= 768;
+      const triggers = [];
 
       // Wait for images to be in DOM
       const initCaseStudiesAnimations = () => {
@@ -327,7 +329,7 @@ export default function Home() {
           if (!imgElement) return;
 
           // Scale animation - subtle zoom from 1 to 1.2
-          ScrollTrigger.create({
+          triggers.push(ScrollTrigger.create({
             trigger: img,
             start: "top bottom",
             end: "top top",
@@ -340,11 +342,11 @@ export default function Home() {
                 overwrite: true,
               });
             },
-          });
+          }));
 
           // Pin animation (disable on mobile for better performance)
           if (!isMobile) {
-            ScrollTrigger.create({
+            triggers.push(ScrollTrigger.create({
               trigger: img,
               start: "top top",
               end: () => {
@@ -355,7 +357,7 @@ export default function Home() {
               pin: true,
               pinSpacing: false,
               invalidateOnRefresh: true,
-            });
+            }));
           }
         });
 
@@ -369,7 +371,7 @@ export default function Home() {
       initCaseStudiesAnimations();
 
       return () => {
-        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+        triggers.forEach((trigger) => trigger && trigger.kill());
       };
     },
     { scope: container }
@@ -380,9 +382,10 @@ export default function Home() {
     () => {
       const strips = gsap.utils.toArray(".strip");
       const isMobile = window.innerWidth <= 768;
+      const triggers = [];
 
       strips.forEach((strip, i) => {
-        ScrollTrigger.create({
+        triggers.push(ScrollTrigger.create({
           trigger: strip,
           start: "top bottom",
           end: "bottom top",
@@ -408,11 +411,11 @@ export default function Home() {
               });
             }
           },
-        });
+        }));
       });
 
       return () => {
-        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+        triggers.forEach((trigger) => trigger && trigger.kill());
       };
     },
     { scope: container }
@@ -426,8 +429,10 @@ export default function Home() {
       const buttonText = document.querySelector(".discovery-call-btn p");
       if (!logo) return;
 
+      const triggers = [];
+
       // Logo color change for works section
-      ScrollTrigger.create({
+      triggers.push(ScrollTrigger.create({
         trigger: ".works",
         start: "top center",
         end: "bottom center",
@@ -459,11 +464,11 @@ export default function Home() {
             ease: "power2.out",
           });
         },
-      });
+      }));
 
       // Button color change for works section
       if (button && buttonText) {
-        ScrollTrigger.create({
+        triggers.push(ScrollTrigger.create({
           trigger: ".works",
           start: "top center",
           end: "bottom center",
@@ -519,10 +524,10 @@ export default function Home() {
               ease: "power2.out",
             });
           },
-        });
+        }));
 
         // Button color change for case studies images section
-        ScrollTrigger.create({
+        triggers.push(ScrollTrigger.create({
           trigger: ".case-studies-items-images",
           start: "top center",
           end: "bottom center",
@@ -578,11 +583,11 @@ export default function Home() {
               ease: "power2.out",
             });
           },
-        });
+        }));
       }
 
       return () => {
-        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+        triggers.forEach((trigger) => trigger && trigger.kill());
       };
     },
     { scope: container }
