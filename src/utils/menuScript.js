@@ -10,7 +10,7 @@ let isAnimating = false;
 let splitTextByContainer = [];
 
 export const initMenu = (onMenuStateChange) => {
-  const heroSection = document.querySelector(".hero");
+  const heroSection = document.querySelector(".intro-loading-section");
   const menuToggleBtn = document.querySelector(".menu-toggle-btn");
   const menuOverlay = document.querySelector(".menu-overlay");
   const menuOverlayContainer = document.querySelector(".menu-overlay-content");
@@ -19,7 +19,7 @@ export const initMenu = (onMenuStateChange) => {
   const menuToggleLabel = document.querySelector(".menu-toggle-label p");
   const hamburgerIcon = document.querySelector(".menu-hamburger-icon");
 
-  if (!heroSection || !menuToggleBtn || !menuOverlay) {
+  if (!menuToggleBtn || !menuOverlay) {
     console.warn("Menu elements not found");
     return;
   }

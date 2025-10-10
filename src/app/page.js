@@ -12,6 +12,7 @@ import Footer from "@/components/Footer/Footer";
 import ShuffleText from "@/components/ShuffleText/ShuffleText";
 import TypeWriter from "@/components/TypeWriter/TypeWriter";
 import GeometricBackground from "@/components/GeometricBackground/GeometricBackground";
+import IntroLoading from "@/components/IntroLoading/IntroLoading";
 import { carouselItems } from "./carouselItems";
 import { initMenu } from "@/utils/menuScript";
 
@@ -25,8 +26,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
   const container = useRef();
-  const heroVideoRef = useRef();
-  const heroSectionRef = useRef();
   const [menuOpen, setMenuOpen] = useState(false);
   const [menuImage, setMenuImage] = useState("/images/home/Menu-picture.jpg");
   const [imageOpacity, setImageOpacity] = useState(1);
@@ -70,143 +69,6 @@ export default function Home() {
       cleanup();
     };
   }, []);
-
-  // Enable video for mobile on first user interaction
-  useEffect(() => {
-    const enableVideoOnMobile = () => {
-      const video = heroVideoRef.current;
-      if (video && video.paused) {
-        video.play().then(() => {
-          video.pause();
-          video.currentTime = 0;
-        }).catch(() => {
-          // Silent fail
-        });
-      }
-    };
-
-    // Add listeners for first user interaction
-    const events = ['touchstart', 'click', 'scroll'];
-    events.forEach(event => {
-      document.addEventListener(event, enableVideoOnMobile, { once: true });
-    });
-
-    return () => {
-      events.forEach(event => {
-        document.removeEventListener(event, enableVideoOnMobile);
-      });
-    };
-  }, []);
-
-  // Auto-scroll on page load to show sphere animation
-  useEffect(() => {
-    const performAutoScroll = () => {
-      const video = heroVideoRef.current;
-      if (video && video.duration) {
-        // Calculate exact scroll distance for 75% of video (150/200 frames)
-        // Video scroll distance = duration * 300 (from ScrollTrigger setup)
-        const totalScrollDistance = video.duration * 300;
-        const scrollTo75Percent = totalScrollDistance * 0.75;
-
-        if (window.lenis) {
-          window.lenis.scrollTo(scrollTo75Percent, {
-            duration: 3.5,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
-          });
-        } else {
-          // Fallback for regular scroll
-          window.scrollTo({
-            top: scrollTo75Percent,
-            behavior: 'smooth'
-          });
-        }
-      } else {
-        // Fallback if video not ready - retry after short delay
-        setTimeout(performAutoScroll, 500);
-      }
-    };
-
-    // Start immediately, no delay
-    const timer = setTimeout(performAutoScroll, 100);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  // Scroll-controlled hero video
-  useGSAP(
-    () => {
-      const video = heroVideoRef.current;
-      const heroSection = heroSectionRef.current;
-
-      if (!video || !heroSection) return;
-
-      let scrollTriggerInstance;
-
-      const initVideoScroll = () => {
-        const videoDuration = video.duration;
-
-        // Ensure video is ready for mobile - play then pause to enable currentTime control
-        video.play().then(() => {
-          video.pause();
-        }).catch(() => {
-          // Silent fail - some browsers may block
-        });
-
-        // Calculate scroll distance - about 300px per second of video
-        const scrollDistance = videoDuration * 300;
-
-        scrollTriggerInstance = ScrollTrigger.create({
-          trigger: heroSection,
-          start: "top top",
-          end: `+=${scrollDistance}`,
-          pin: true,
-          pinSpacing: true,
-          scrub: 0.5,
-          invalidateOnRefresh: true,
-          onUpdate: (self) => {
-            const progress = self.progress;
-
-            if (video.duration && !isNaN(video.duration)) {
-              const newTime = progress * videoDuration;
-              if (Math.abs(video.currentTime - newTime) > 0.01) {
-                video.currentTime = newTime;
-              }
-            }
-          },
-          onComplete: () => {
-            // Video finished, continue scrolling normally
-            if (video.duration && !isNaN(video.duration)) {
-              video.currentTime = video.duration - 0.01;
-            }
-          }
-        });
-
-        // Refresh all ScrollTriggers after adding the video one
-        setTimeout(() => {
-          ScrollTrigger.refresh();
-          ScrollTrigger.sort();
-        }, 100);
-      };
-
-      // Wait for video to load
-      if (video.readyState >= 1) {
-        initVideoScroll();
-      } else {
-        const handleLoadedMetadata = () => {
-          initVideoScroll();
-        };
-        video.addEventListener('loadedmetadata', handleLoadedMetadata);
-
-        return () => {
-          video.removeEventListener('loadedmetadata', handleLoadedMetadata);
-          if (scrollTriggerInstance) {
-            scrollTriggerInstance.kill();
-          }
-        };
-      }
-    },
-    { dependencies: [] }
-  );
 
   // Image loop effect for menu with fade transition
   useEffect(() => {
@@ -788,39 +650,7 @@ export default function Home() {
       </nav>
 
       <div className="app" ref={container}>
-        <section className="hero" ref={heroSectionRef}>
-          <div className="hero-img">
-            <video
-              ref={heroVideoRef}
-              src="/Sphere_white.mp4"
-              muted
-              playsInline
-              preload="auto"
-              style={{
-                width: '100vw',
-                height: '100vh',
-                objectFit: 'cover',
-                objectPosition: 'center center',
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                backgroundColor: '#000',
-                filter: 'contrast(1.02) saturate(1.05)',
-                backfaceVisibility: 'hidden',
-                transform: 'translateZ(0) scale(1.01)',
-                willChange: 'transform'
-              }}
-            />
-          </div>
-          <div className="hero-img-gradient"></div>
-          <div className="container">
-            <div className="hero-copy">
-              <div className="hero-copy-col">
-                <h1>The Creative<br />Growth Studio</h1>
-              </div>
-            </div>
-          </div>
-        </section>
+        <IntroLoading />
 
         <section className="marquee-section" style={{
           backgroundColor: 'var(--background)',
